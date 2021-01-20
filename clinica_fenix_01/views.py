@@ -101,6 +101,7 @@ class ListaPacientes(ListView):
 
 class CrearUsuario(CreateView):
     model = Usuario
+    template_name= "clinica_fenix_01/new_user.html"
     fields = '__all__'
     success_url = reverse_lazy('clinica_fenix_01:lista_usuario')
 

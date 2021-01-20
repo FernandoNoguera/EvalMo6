@@ -26,10 +26,10 @@ class Usuario(models.Model):   ## Se refiere a crear o ingresar un paciente nuev
                 "Apellido paterno no puede tener solo 1 caracter ")]
         )
     apellido_materno = models.CharField(max_length=60)
-    edad = models.IntegerField(3)
+    edad = models.IntegerField()
     rut = models.CharField(max_length=60)
     nacionalidad = models.CharField(max_length=60)
-    teléfono = models.IntegerField(11)
-    dirección = models.CharField(max_length=60)
+    telefono = models.IntegerField()
+    direccion = models.CharField(max_length=50)
 
 
