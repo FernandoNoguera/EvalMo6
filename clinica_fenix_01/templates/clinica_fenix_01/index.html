@@ -1,0 +1,228 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+  <head>
+    <title>Clinica</title>
+    <meta charset="utf-8">
+    <meta name="viewport" 
+        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link 
+      rel="stylesheet" 
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" 
+      crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" 
+        rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'clinica_fenix_01/css/style.css' %}">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <a class="navbar-brand" href="{% url 'clinica_fenix_01:index' %}">The Great Fenix Clinic</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navigation"
+        aria-expanded="false"
+        aria-controls="navigation" 
+        aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navigation">
+         <ul class="navbar-nav mr-auto">
+            <li class="nav-item text-succes">    
+            </li>                    
+         </ul>
+          <form class="form-inline my-2 my-lg-0 NavButton">
+           <button class="btn btn-outline-success border-dark 
+                    font-weight-bold text-white my-2 my-sm-0"
+                    type="submit"> <a href="{% url 'clinica_fenix_01:login' %}">Registrarse</a> </button>
+      </div>
+    </nav>
+    <div class="container-fluid bg-principal" id="principal">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="container-fluid bg-light" id="equipo">
+            <div class="row">
+              <h3>Queremos que te mejores</h3>
+              <div class="h4">
+              <p id="parraf">
+                Porque "The Great Clinic" nació para hacer que tú ida al médico sea más expedita, y por que sabemos lo importante <br>
+                que es para ti el que puedas continuar tú día que esperas, inscribite Ya!
+                es gratuito.<br> Los datos nos avalan ven y revisa las estadisticas con nosotros.
+              </p>
+              </div>
+            </div>
+            <div class="row">
+              <div id="team-carousel" 
+                  class="carousel slide" 
+                  data-ride="carousel" 
+                  data-interval="3000">
+                <div class="carousel-inner" style="padding: 4rem;" role="listbox">
+                  <div style="height: 400px" class="carousel-item active">
+                    <img class="d-block img-fluid carousel-img" src="{% static 'clinica_fenix_01/img/medicinageneral.jpg' %}">
+                    <div class="carousel-caption">
+                      Excelencia
+                    </div>
+                  </div>
+                  <div style="height: 400px" class="carousel-item">
+                    <img class="d-block img-fluid carousel-img" src="{% static 'clinica_fenix_01/img/med1.jpg' %}">
+                    <div class="carousel-caption">
+                      Tecnología de punta
+                    </div>
+                  </div>
+                  <div style="height: 400px" class="carousel-item">
+                    <img class="d-block img-fluid carousel-img" src="{% static 'clinica_fenix_01/img/med2.jpg' %}">
+                    <div class="carousel-caption">
+                      Asesoria
+                    </div>
+                  </div>
+                </div>
+                <a class="left carousel-control" 
+                    href="#team-carousel" 
+                    role="button" 
+                    data-slide="prev">
+                  <span class="icon-prev" aria-hidden="true"></span>
+                </a>
+                <a class="right carousel-control" 
+                    href="#team-carousel" 
+                    role="button" 
+                    data-slide="next">
+                  <span class="icon-next" aria-hidden="true"></span>
+                </a>
+                <ol class="carousel-indicators">
+                  <li data-target="#team-carousel" 
+                      data-slide-to="0" 
+                      class="active"></li>
+                  <li data-target="#team-carousel" 
+                      data-slide-to="1"></li>
+                  <li data-target="#team-carousel" 
+                      data-slide-to="2"></li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid bg-dark" id="enlaces">
+      <div class="row">
+          <h3>Enlaces de Interés</h3>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="media">
+            <img class="d-flex mr-3" src="{% static 'clinica_fenix_01/img/flag-64.png' %}" 
+                alt="Generic placeholder image">
+            <div class="media-body">
+              <h5 class="mt-0">Enlaces Tipo 1</h5>
+              <ul>
+                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
+                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
+                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
+                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="media">
+            <img class="d-flex mr-3" src="{% static 'clinica_fenix_01/img/world-64.png' %}" 
+                alt="Generic placeholder image">
+            <div class="media-body">
+              <h5 class="mt-0">Enlaces Tipo 2</h5>
+              <ul>
+                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
+                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
+                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
+                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="media">
+            <img class="d-flex mr-3" src="{% static 'clinica_fenix_01/img/screen-64.png' %}" 
+                alt="Generic placeholder image">
+            <div class="media-body">
+              <h5 class="mt-0">Enlaces Tipo 3</h5>
+              <ul>
+                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
+                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
+                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
+                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="media">
+            <img class="d-flex mr-3" src="{% static 'clinica_fenix_01/img/gear-64.png'  %}" 
+                alt="Generic placeholder image">
+            <div class="media-body">
+              <h5 class="mt-0">Enlaces Tipo 4</h5>
+              <ul>
+                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
+                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
+                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
+                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid bg-light" id="contacto">
+      <div class="row">
+        <h2>Contáctanos</h2>
+      </div>
+      <div class="row justify-content-center align-items-center h-100">
+        <div class="col-sm-6" id="contact-form">
+          <form>
+            <div class="form-group">
+              <label for="contact-name">Nombre</label>
+              <input type="text" class="form-control" id="contact-name" 
+                  placeholder="Tu Nombre">
+            </div>
+            <div class="form-group">
+              <label for="contact-email">Email</label>
+              <input type="email" class="form-control" id="contact-email" 
+                  placeholder="Tu Email">
+            </div>
+            <div class="form-group">
+              <label for="contact-msg">Email</label>
+              <textarea class="form-control" id="contact-msg" 
+                  placeholder="Tu Mensaje" rows="4"></textarea>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-outline-secondary">Enviar</button>
+              <button type="button" class="btn btn-outline-secondary">Limpiar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <footer class="footer bg-dark text-center fixed-bottom">
+      <p class="text-muted">&copy; 2021 Clinica Fenix.</p>
+      <p class="text-muted">Renaciendo Pacientes</p>
+    </footer>
+    <script 
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" 
+      crossorigin="anonymous">
+    </script>
+    <script 
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" 
+      crossorigin="anonymous">
+    </script>
+    <script 
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" 
+      crossorigin="anonymous">
+    </script>
+  </body>
+</html>

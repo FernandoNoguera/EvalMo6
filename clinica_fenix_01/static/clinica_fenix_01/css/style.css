@@ -1,0 +1,143 @@
+
+#competencias, 
+#contacto {
+    padding-top: 60px;
+    min-height: 700px;
+}
+
+#principal {
+    padding: 100px 5% 20px;
+    min-height: 700px;
+}
+
+#competencias > div >  h3 {
+    color: white;
+}
+
+#equipo {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+#enlaces {
+    color:white;
+    padding-top: 60px;
+    min-height: 100%;
+}
+
+.navbar a {
+    font-weight: bold;
+}
+
+.navbar-dark {
+    background-color:lightskyblue;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar, .modal { 
+    font-family: 'Poiret One', cursive;
+}
+
+.bg-principal {
+    background-image: url('../img/imagen-bg-salud.jpg');
+    background-size: cover;
+}
+
+.jumbotron {
+    color: white;
+    background: rgb(0, 0, 0); /* Para navegadores antiguos */
+    background: rgba(0, 0, 0, 0.5); 
+ }
+
+.card {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.media {
+    margin: 20px 5% 50px 10%;
+}
+
+#contact-form { 
+    padding-top: 3rem; 
+} 
+
+textarea { 
+    resize: none; 
+}
+
+.footer p {
+    display: inline;
+}
+.nav-item{
+    
+    color: black;
+}
+hr{
+    border: 2px solid black;
+}
+#btn-parraf{
+    background-color: black;
+}
+p{
+    font-family: 'poiret, cursive' !important;
+}
+#nav-private{
+    align-items: center;
+}
+#sidebar-container{
+    min-height: 100vh;
+    
+}
+#sidebar-container.logo{
+    padding: .875rem 2rem;
+}
+#sidebar-container.menu{
+   width: 18rem; 
+}
+.bg-primary{
+    background-color:lightcyan!important ;
+}
+#parraf{
+    padding-right: 1rem;
+}
+.imagen-perfil{
+    align-items: center;
+}
+.bg-primary.menu{
+    background-color: green !important;
+    
+}
+#espacio{
+    margin-left: 53vh;
+}
+#espacio-centro{
+    margin-left: 77vh;
+    margin-bottom: 50%;
+}
+#espacio-left{
+    margin-left: 85vmax;
+}
+#img-icon{
+    height: 30vh;
+    width: 30vh;
+}
+#run{
+    text-align: center;  
+    margin-left: 50vh; 
+}
+#parrafo-private{
+    font-family: 'Courier New', Courier, monospace;
+}
+.NavButton{
+    margin-right: 2%;
+}
+.ImgProveedores{
+    width: 100%;
+    max-height: 400px;
+}
+.marco{
+    display:block;
+    margin:auto;
+}
+    
+      
