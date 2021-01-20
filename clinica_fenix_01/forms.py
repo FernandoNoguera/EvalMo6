@@ -7,10 +7,10 @@ class IngresoUsuario(forms.Form):
     usuario = forms.CharField()
     clave = forms.CharField(widget=forms.PasswordInput)
  
-class FormularioUsuario (forms.ModelForm):
+class FormularioUsuario(forms.ModelForm):
 
     class Meta:
-        model = Usuario
-        fields = '__all__'
+        model=Usuario
+        fields='__all__'
     
 

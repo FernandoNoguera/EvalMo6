@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect 
 from django.conf import settings
-from .forms import IngresoUsuario
+from .forms import IngresoUsuario, FormularioUsuario
 import json
 from .models import Usuario
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-#from django.views.generic.basic import View
+from django.views.generic import View
 
 def inicio(request):  
     return render(request, 'clinica_fenix_01/index.html')
@@ -89,7 +89,32 @@ def render_cliente(request, id):
     context = {'id':id, 'cliente': cliente_datos }
     return render(request, 'clinica_fenix_01/render_cliente.html', context)
 
+
+class ListaPacientes(ListView):
+    model= Usuario
+    template_name= "clinica_fenix_01/lista_usuario.html"
+    #context_object_name = ""}
+    #extra_context = {''}
+
+
+
+
 class CrearUsuario(CreateView):
     model = Usuario
     fields = '__all__'
-    success_url = reverse_lazy('clinica_fenix_01:new_user')
+    success_url = reverse_lazy('clinica_fenix_01:lista_usuario')
+
+
+class EliminarPaciente(DeleteView):
+    model = Usuario
+    fields = '__all__'
+    success_url = reverse_lazy('clinica_fenix_01:lista_usuario')
+
+
+class EditarPaciente(UpdateView):
+    model = Usuario
+    fields = '__all__'
+    success_url = reverse_lazy('clinica_fenix_01:lista_usuario')
+
+    
+
