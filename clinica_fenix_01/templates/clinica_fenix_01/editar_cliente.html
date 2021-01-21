@@ -20,7 +20,7 @@
     <div class="container-fluid text-center">
         <div class="row">
             <div class="col-12">
-                <h1>Eliminando Cliente</h1>
+                <h1>Edicion de Cliente</h1>
             </div>
           </div>
     </div>
@@ -29,25 +29,20 @@
     <div class="container-fluid text-center">
         <div class="row">
             <div class="col-12">
-                <form method="POST" action="{% url 'clinica_fenix_01:eliminar_cliente' pk=Usuario.id %}"> 
+                <form method="post" novalidate> 
                     {% csrf_token %} 
-                    <h1>¿Está seguro de eliminar el cliente con id = {{Usuario.id}}?</h1> 
-                    <input type="Submit" value="Si"/>
                     <br>
+                    {{form.as_table}}
+                    <h3>
+                        <input type="Submit" value="Guardar">
+                        <a href="{% url 'clinica_fenix_01:lista_usuario' %}">
+                          <button type="button">Cancelar</button></a>
+                    </h3>
                 </form>
             </div>
           </div>
     </div>
     <br>
-    <div class="container-fluid text-center">
-        <div class="row">
-            <div class="col-12">
-                <h1><a href="{% url 'clinica_fenix_01:lista_usuario' %}">
-                    Cancelar
-                </a></h1>
-            </div>
-          </div>
-    </div>
     <footer class="footer bg-dark text-center fixed-bottom">
         <p class="text-muted">&copy; 2021 Clinica Fenix.</p>
         <p class="text-muted">Renaciendo Pacientes</p>

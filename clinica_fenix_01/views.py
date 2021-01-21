@@ -93,10 +93,8 @@ def render_cliente(request, id):
 class ListaPacientes(ListView):
     model= Usuario
     template_name= "clinica_fenix_01/lista_usuario.html"
-    #context_object_name = ""}
+    context_object_name = "Usuario"
     #extra_context = {''}
-
-
 
 
 class CrearUsuario(CreateView):
@@ -108,12 +106,15 @@ class CrearUsuario(CreateView):
 
 class EliminarPaciente(DeleteView):
     model = Usuario
+    template_name= "clinica_fenix_01/eliminar_cliente.html"
+    context_object_name = "Usuario"
     fields = '__all__'
     success_url = reverse_lazy('clinica_fenix_01:lista_usuario')
 
 
 class EditarPaciente(UpdateView):
     model = Usuario
+    template_name= "clinica_fenix_01/editar_cliente.html"
     fields = '__all__'
     success_url = reverse_lazy('clinica_fenix_01:lista_usuario')
 
