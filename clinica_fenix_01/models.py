@@ -32,4 +32,17 @@ class Usuario(models.Model):   ## Se refiere a crear o ingresar un paciente nuev
     telefono = models.IntegerField()
     direccion = models.CharField(max_length=50)
 
+    class Meta:
+        ordering = ['id']
 
+
+class Examen(models.Model):   ## Se refiere a crear o ingresar un examen
+
+    plaquetas = models.IntegerField()
+    globulos_blancos = models.IntegerField()
+    globulos_rojos = models.IntegerField()
+    hematocritos = models.IntegerField()
+    usuario_id = models.ForeignKey(Usuario,on_delete=models.CASCADE, null =True)
+
+    class Meta:
+        ordering = ['id']

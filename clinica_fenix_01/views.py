@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from .forms import IngresoUsuario, FormularioUsuario
 import json
-from .models import Usuario
+from .models import Usuario, Examen
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -119,4 +119,31 @@ class EditarPaciente(UpdateView):
     success_url = reverse_lazy('clinica_fenix_01:lista_usuario')
 
     
+class ListaExamenes(ListView):
+    model= Examen
+    template_name= "clinica_fenix_01/lista_examen.html"
+    context_object_name = "Examenes"
+    #extra_context = {''}
+
+
+class CrearExamen(CreateView):
+    model = Examen
+    template_name= "clinica_fenix_01/new_examen.html"
+    fields = '__all__'
+    success_url = reverse_lazy('clinica_fenix_01:lista_examen')
+
+
+class EliminarExamen(DeleteView):
+    model = Examen
+    template_name= "clinica_fenix_01/eliminar_examen.html"
+    context_object_name = "Examenes"
+    fields = '__all__'
+    success_url = reverse_lazy('clinica_fenix_01:lista_examen')
+
+
+class EditarExamen(UpdateView):
+    model = Examen
+    template_name= "clinica_fenix_01/editar_examen.html"
+    fields = '__all__'
+    success_url = reverse_lazy('clinica_fenix_01:lista_examen')
 
