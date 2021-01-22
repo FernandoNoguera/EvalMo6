@@ -93,16 +93,9 @@ def render_cliente(request, id):
 
 
 class ListaPacientes(ListView):
-    lista = []
     model= Usuario
     template_name= "clinica_fenix_01/lista_usuario.html"
     context_object_name = "Usuario"
-    
-    
-        
-
-    
-    
     #extra_context = {'usuario': usuarios }
 
 
