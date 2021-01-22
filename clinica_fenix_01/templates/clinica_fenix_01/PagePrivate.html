@@ -26,15 +26,9 @@
           <a href="{% url 'clinica_fenix_01:lista_usuario' %}"class= "d-block p-4"> <i class="icon ion-md-heart"></i>    Lista Cliente</a>
           <a href="{% url 'clinica_fenix_01:login' %}"class= "d-block p-4"> <i class="icon ion-md-heart"></i>    Salir</a>
           <a href="{% url 'clinica_fenix_01:lista_examen' %}"class= "d-block p-4"> <i class="icon ion-md-heart"></i>    Lista Examenes</a>
-          <p>usuarios</p>
-          <p>{{usuarios.rut}}</p>
-          <p>lista</p>
-          <p>{{lista}}</p>
-          
-         
         </nav>
         <div class="col-9 ">
-          <div class="h4"> Graficación de edades de nuestros 10 últimos clientes:
+          <div class="h4"> Graficación de edades de nuestros clientes:
             <p id="parrafo-private">
             <div class="chart">
             <canvas id="myChart"></canvas>
@@ -53,7 +47,7 @@
           /* En type se define el tipo de grafico a mostrar */
           type:"bar",
           data:{
-              labels:{{edad}},
+              labels:{{nombre|safe}},
               datasets:[{
                       label:'Edades',
                       data:{{edad}},
@@ -72,5 +66,5 @@
               }
           }
       });
-  </script>
+    </script>
 </html>

@@ -11,9 +11,9 @@ urlpatterns = [
     path("lista_usuarios/", views.ListaPacientes.as_view(), name="lista_usuario"),
     path("<int:pk>/borrar/",views.EliminarPaciente.as_view(), name="eliminar_cliente"),
     path("<int:pk>/editar/",views.EditarPaciente.as_view(), name="editar_cliente"),
-    path("<id>/render/", views.render_cliente, name="render_cliente"),
     path("examen_nuevo/", views.CrearExamen.as_view(), name="nuevo_examen"),
     path("examen_usuarios/", views.ListaExamenes.as_view(), name="lista_examen"),
     path("<int:pk>/borrar_examen/",views.EliminarExamen.as_view(), name="eliminar_examen"),
-    path("<int:pk>/editar_examen/",views.EditarExamen.as_view(), name="editar_examen")
+    path("<int:pk>/editar_examen/",views.EditarExamen.as_view(), name="editar_examen"),
+    path("<int:pk>/examen_cliente/", views.examen_cliente, name="examen_cliente"),
 ]
