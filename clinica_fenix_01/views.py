@@ -29,67 +29,19 @@ def private_page(request):
     dic1 = {}
     dic2 = {}
     edad = []
+    apellidos = []
     usuarios = Usuario.objects.all().values()
     for i in usuarios:
         for key,value in i.items():
             dic1 = key,value
             if key == 'edad':
-                    edad.append(value)
+                edad.append(value)
+            elif key == 'apellido_paterno':
+                apellidos.append(value)
             else:
                 continue
-        
-
-    #lista = list(Usuario.objects.values().filter()
-
-    context = {'edad': edad}
+    context = {'edad': edad, 'nombre':apellidos , 'usuarios': usuarios}
     return render(request, 'clinica_fenix_01/PagePrivate.html', context)
-
-def nuevo_usuario(request):
-    formulario = NewUser(request.POST or None)
-    context = {'form':formulario}
-    if formulario.is_valid():
-        form_data = formulario.cleaned_data
-        filename= "/clinica_fenix_01/static/clinica_fenix_01/data/clientes.json"
-        with open(str(settings.BASE_DIR)+filename, 'r') as file:
-            usuario=json.load(file)
-        form_data['id'] = usuario['ultimo_id_generado'] + 1
-        usuario['ultimo_id_generado'] = form_data['id']
-        usuario['usuario'].append(form_data)
-        with open(str(settings.BASE_DIR)+filename, 'w') as file:
-            json.dump(usuario, file)
-        return redirect('clinica_fenix_01:lista_usuario')               
-    return render(request, 'clinica_fenix_01/new_user.html', context)
-
-def usuarios_registrados(request):
-    filename= "/clinica_fenix_01/static/clinica_fenix_01/data/clientes.json"
-    with open(str(settings.BASE_DIR)+filename, 'r') as file:
-        clientes=json.load(file)
-    return render(request, 'clinica_fenix_01/lista_usuario.html', context=clientes)
-
-def eliminar_cliente(request, id):
-    if request.method == "POST":
-        filename= "/clinica_fenix_01/static/clinica_fenix_01/data/clientes.json"
-        with open(str(settings.BASE_DIR)+filename, 'r') as file:
-            clientes=json.load(file)
-        for cliente in clientes['usuario']:
-            if int(cliente['id']) == int(id):
-                clientes['usuario'].remove(cliente)
-                break
-        with open(str(settings.BASE_DIR)+filename, 'w') as file:
-            json.dump(clientes, file)
-        return redirect('clinica_fenix_01:lista_usuario')
-    context = {'id':id}
-    return render(request, 'clinica_fenix_01/eliminar_cliente.html', context)
-
-def render_cliente(request, id):
-    filename= "/clinica_fenix_01/static/clinica_fenix_01/data/clientes.json"
-    with open(str(settings.BASE_DIR)+filename, 'r') as file:
-        clientes=json.load(file)
-    for cliente in clientes['usuario']:
-        if int(cliente['id']) == int(id):
-            cliente_datos = cliente
-    context = {'id':id, 'cliente': cliente_datos }
-    return render(request, 'clinica_fenix_01/render_cliente.html', context)
 
 
 class ListaPacientes(ListView):
@@ -149,4 +101,32 @@ class EditarExamen(UpdateView):
     template_name= "clinica_fenix_01/editar_examen.html"
     fields = '__all__'
     success_url = reverse_lazy('clinica_fenix_01:lista_examen')
+
+def examen_cliente(request, pk):
+    dic1 = {}
+    data_num = []
+    usuarios = Usuario.objects.all().values()
+    examen = Examen.objects.all().values()
+    for cliente in usuarios:
+        if int(cliente['id']) == int(pk):
+            cliente_datos = cliente
+    #### dato 1 Plaquetas
+    for cliente in examen:
+        if int(cliente['usuario_id_id']) == int(pk):
+            for key,value in cliente.items():
+                dic1 = key,value
+                if key == 'plaquetas':
+                    data_num.append(value)
+                elif key == 'globulos_blancos':#### dato 2 G blancos
+                    data_num.append(value)
+                elif key == 'globulos_rojos':##### dato 3 G rojos
+                    data_num.append(value)
+                elif key == 'hematocritos': ##### dato 4 Hematocrito
+                    data_num.append(value)
+                else:
+                    continue
+        else:
+            pass
+    context = {'id':id, 'cliente': cliente_datos, 'data_num': data_num , 'examen': examen }
+    return render(request, 'clinica_fenix_01/render_cliente.html', context)
 
