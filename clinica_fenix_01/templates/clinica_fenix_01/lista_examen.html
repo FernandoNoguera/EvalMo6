@@ -25,6 +25,7 @@
     </div>
     <br>
     <h2>Listado Actualizado de Nuestros Pacientes y sus Examenes</h2>
+    
     <h4><a class= "boton" href="{% url 'clinica_fenix_01:nuevo_examen' %}">Crear otro Examen</a></h4>
     <table class="table">
         <tr>
@@ -37,7 +38,6 @@
             <th></th>
             <th></th>
         </tr>    
-
     {% for Examen in Examenes %}
         <tr>
             <td>{{Examen.id}}</td>

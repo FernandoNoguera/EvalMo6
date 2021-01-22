@@ -26,20 +26,22 @@ def login(request):
     return render(request, 'clinica_fenix_01/registro.html',context)
 
 def private_page(request):
-    listaedad = []
-    listapellido = []
-    filename= "/clinica_fenix_01/static/clinica_fenix_01/data/clientes.json"
-    with open(str(settings.BASE_DIR)+filename, "r") as file:
-        usuarios = json.load(file)
-        diccionario = usuarios.get('usuario')
-        for elemento in diccionario:
-            edad = elemento.get('edad')
-            edad = int(edad)
-            listaedad.append(edad)
-        for elemento in diccionario:
-            apellido = elemento.get('apellido_paterno')
-            listapellido.append(apellido)
-    context = {'edades' : listaedad, 'apellidos': listapellido}
+    dic1 = {}
+    dic2 = {}
+    edad = []
+    usuarios = Usuario.objects.all().values()
+    for i in usuarios:
+        for key,value in i.items():
+            dic1 = key,value
+            if key == 'edad':
+                    edad.append(value)
+            else:
+                continue
+        
+
+    #lista = list(Usuario.objects.values().filter()
+
+    context = {'edad': edad}
     return render(request, 'clinica_fenix_01/PagePrivate.html', context)
 
 def nuevo_usuario(request):
@@ -91,10 +93,18 @@ def render_cliente(request, id):
 
 
 class ListaPacientes(ListView):
+    lista = []
     model= Usuario
     template_name= "clinica_fenix_01/lista_usuario.html"
     context_object_name = "Usuario"
-    #extra_context = {''}
+    
+    
+        
+
+    
+    
+    #extra_context = {'usuario': usuarios }
+
 
 
 class CrearUsuario(CreateView):
