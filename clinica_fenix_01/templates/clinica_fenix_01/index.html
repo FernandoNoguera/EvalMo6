@@ -108,103 +108,34 @@
     </div>
     <div class="container-fluid bg-dark" id="enlaces">
       <div class="row">
-          <h3>Enlaces de Interés</h3>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="media">
-            <img class="d-flex mr-3" src="{% static 'clinica_fenix_01/img/flag-64.png' %}" 
-                alt="Generic placeholder image">
-            <div class="media-body">
-              <h5 class="mt-0">Enlaces Tipo 1</h5>
-              <ul>
-                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
-                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
-                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
-                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="media">
-            <img class="d-flex mr-3" src="{% static 'clinica_fenix_01/img/world-64.png' %}" 
-                alt="Generic placeholder image">
-            <div class="media-body">
-              <h5 class="mt-0">Enlaces Tipo 2</h5>
-              <ul>
-                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
-                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
-                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
-                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="media">
-            <img class="d-flex mr-3" src="{% static 'clinica_fenix_01/img/screen-64.png' %}" 
-                alt="Generic placeholder image">
-            <div class="media-body">
-              <h5 class="mt-0">Enlaces Tipo 3</h5>
-              <ul>
-                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
-                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
-                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
-                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="media">
-            <img class="d-flex mr-3" src="{% static 'clinica_fenix_01/img/gear-64.png'  %}" 
-                alt="Generic placeholder image">
-            <div class="media-body">
-              <h5 class="mt-0">Enlaces Tipo 4</h5>
-              <ul>
-                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
-                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
-                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
-                <li>Enlace de interés del grupo <a href="#">Ver más</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container-fluid bg-light" id="contacto">
-      <div class="row">
         <h2>Contáctanos</h2>
       </div>
       <div class="row justify-content-center align-items-center h-100">
         <div class="col-sm-6" id="contact-form">
-          <form>
+          <form  method="">
+            {% csrf_token %}
             <div class="form-group">
-              <label for="contact-name">Nombre</label>
-              <input type="text" class="form-control" id="contact-name" 
-                  placeholder="Tu Nombre">
+              <p><label for="id_name">Nombre:</label><br> <input type="text" name="name" required id="id_name"></p>
             </div>
             <div class="form-group">
-              <label for="contact-email">Email</label>
-              <input type="email" class="form-control" id="contact-email" 
-                  placeholder="Tu Email">
+              <p><label for="id_asunto">Asunto:</label><br> <input type="text" name="asunto" required id="id_asunto"></p>
             </div>
             <div class="form-group">
-              <label for="contact-msg">Email</label>
-              <textarea class="form-control" id="contact-msg" 
-                  placeholder="Tu Mensaje" rows="4"></textarea>
+              <p><label for="id_email">Correo Electrónico:</label><br> <input type="email" name="email" required id="id_email"></p>
+            </div>
+            <div class="form-group">
+              <p><label for="id_message">Mensaje:</label><br> <textarea name="message" cols="40" rows="5" required id="id_message"></textarea></p>
             </div>
             <div class="btn-group">
-              <button type="button" class="btn btn-outline-secondary">Enviar</button>
-              <button type="button" class="btn btn-outline-secondary">Limpiar</button>
+              <button type="submit" value="submit" class="btn btn-success">Enviar</button>
             </div>
+            <br>
           </form>
         </div>
       </div>
     </div>
+    <br>
+    <br>
     <footer class="footer bg-dark text-center fixed-bottom">
       <p class="text-muted">&copy; 2021 Clinica Fenix.</p>
       <p class="text-muted">Renaciendo Pacientes</p>

@@ -1,15 +1,47 @@
 from django.shortcuts import render, redirect 
 from django.conf import settings
-from .forms import IngresoUsuario, FormularioUsuario
+from .forms import IngresoUsuario, FormularioUsuario, ContactForm
 import json
 from .models import Usuario, Examen
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import View
+import requests
+from django.core.mail import EmailMessage
+from django.shortcuts import render, redirect
+from django.conf import settings
+import random
+from django.http import HttpResponse
 
-def inicio(request):  
-    return render(request, 'clinica_fenix_01/index.html')
+def inicio(request):
+    formulario = ContactForm(request.POST or None)
+    context = {'form':formulario}
+    if request.method == "POST":
+        formulario = ContactForm(request.POST)
+        if formulario.is_valid():
+            infoform = formulario.cleaned_data
+            filename = "\clinica_fenix_01\static\clinica_fenix_01\data\contactos.json"
+            with open(str(settings.BASE_DIR)+filename, "r") as file:
+                usuario = json.load(file)
+            infoform['id'] = usuario['ultimo_id_generado'] + 1
+            usuario['ultimo_id_generado'] = infoform['id']
+            usuario['usuario'].append(infoform)
+            with open(str(settings.BASE_DIR)+filename, 'w') as file:
+                json.dump(usuario, file)
+            asunto = infoform['asunto']
+            nombre = infoform['name']
+            emailcontacto = infoform['email']
+            message = infoform['message']
+            respuesta = ['Hola ', nombre,'. \n Hemos recibido tu mensaje:\n \n',
+                        message, '\n \n Pronto nuestro equipo se pondrá en contacto con usted al correo indicado: \n \n',
+                        emailcontacto, '\n \n Saludos del equipo. \n Clinica Fenix S.A.']
+            respuesta = "".join(map(str, respuesta))   
+            email = EmailMessage(asunto, respuesta, to=[emailcontacto])
+            emaily = EmailMessage('Correo de Prueba desde Django', 'Enviando correo de prueba', to=['Fnoguerav25@gmail.com'])  
+            email.send()
+            return redirect('clinica_fenix_01:index')     
+    return render(request, 'clinica_fenix_01/index.html',context)
 
 def login(request):
     formulario = IngresoUsuario(request.POST or None)
