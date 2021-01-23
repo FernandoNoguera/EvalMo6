@@ -123,3 +123,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = 'clinica_fenix_01/static/'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'correo.pruebas.desarrollo.200@gmail.com'
+EMAIL_HOST_PASSWORD = 'Pruebasdesarrollo200'
+EMAIL_PORT = 587
