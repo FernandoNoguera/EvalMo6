@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from .forms import IngresoUsuario, FormularioUsuario, ContactForm
 import json
-from .models import Usuario, Examen
+from .models import Usuario, Examen, Profile
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -13,6 +13,9 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 import random
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+
 
 def inicio(request):
     formulario = ContactForm(request.POST or None)
@@ -43,20 +46,21 @@ def inicio(request):
             return redirect('clinica_fenix_01:index')     
     return render(request, 'clinica_fenix_01/index.html',context)
 
-def login(request):
-    formulario = IngresoUsuario(request.POST or None)
-    context = {'form':formulario}
-    if formulario.is_valid():
-        form_data = formulario.cleaned_data
-        filename = "/clinica_fenix_01/static/clinica_fenix_01/data/usuario.json"
-        with open(str(settings.BASE_DIR)+filename, 'r') as file:
-            usuario=json.load(file)
-        if (form_data['usuario'] == usuario['usuario']) and (form_data['clave'] == usuario['clave']):
-            return redirect('clinica_fenix_01:portal_privado')               
-        else:
-            return redirect('clinica_fenix_01:login')               
-    return render(request, 'clinica_fenix_01/registro.html',context)
+# se comenta por nuevo login def login(request):
+# se comenta por nuevo login     formulario = IngresoUsuario(request.POST or None)
+# se comenta por nuevo login     context = {'form':formulario}
+# se comenta por nuevo login     if formulario.is_valid():
+# se comenta por nuevo login         form_data = formulario.cleaned_data
+# se comenta por nuevo login         filename = "/clinica_fenix_01/static/clinica_fenix_01/data/usuario.json"
+# se comenta por nuevo login         with open(str(settings.BASE_DIR)+filename, 'r') as file:
+# se comenta por nuevo login             usuario=json.load(file)
+# se comenta por nuevo login         if (form_data['usuario'] == usuario['usuario']) and (form_data['clave'] == usuario['clave']):
+# se comenta por nuevo login             return redirect('clinica_fenix_01:portal_privado')               
+# se comenta por nuevo login         else:
+# se comenta por nuevo login             return redirect('clinica_fenix_01:login')               
+# se comenta por nuevo login     return render(request, 'clinica_fenix_01/registro.html',context)
 
+@login_required(login_url='/accounts/login/')
 def private_page(request):
     dic1 = {}
     dic2 = {}
@@ -161,4 +165,6 @@ def examen_cliente(request, pk):
             pass
     context = {'id':id, 'cliente': cliente_datos, 'data_num': data_num , 'examen': examen }
     return render(request, 'clinica_fenix_01/render_cliente.html', context)
+
+def 
 
