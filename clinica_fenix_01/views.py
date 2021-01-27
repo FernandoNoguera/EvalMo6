@@ -149,8 +149,6 @@ class Registro(generic.CreateView):
 
      
     form_class = UserCreationForm
-    #model = Usuario
-    #fields = '__all__'
     template_name= "clinica_fenix_01/registro.html"
-    success_url = reverse_lazy('clinica_fenix_01:login')
+    success_url = reverse_lazy('clinica_fenix_01:index')
 
