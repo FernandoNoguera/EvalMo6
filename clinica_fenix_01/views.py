@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect 
 from django.conf import settings
-from .forms import ContactForm
+#from .forms import ContactForm
 import json
 from .models import Usuario, Examen
 from django.urls import reverse_lazy
@@ -16,7 +16,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User 
+from django.contrib.auth.models import User
+from django.contrib.auth.mixins import UserPassesTestMixin
+
+
+#def es_jefe(user):
+#    rol = user.Usuario.rol
+#    if rol == "ADMINISTRADOR":
+#        return True
+#    else:
+#        return False 
 
 
 def inicio(request):
@@ -38,12 +47,13 @@ def private_page(request):
             else:
                 continue
 
-    usuario_id = request.user.id #OBTENER ID DEL USUARIO QUE ESTA VISITANDO LA VISTA
-    #perfil = Usuario.objects.filter(usuario_id=usuario_id).values()[0]
-    perfil = Usuario.objects.all()[0]
-    
+    try:
+        usuario_id = request.user.id #OBTENER ID DEL USUARIO QUE ESTA VISITANDO LA VISTA
+        perfil = Usuario.objects.filter(usuario_id=usuario_id).values()[0]
+    except:
+        perfil= 0
 
-    context = {'edad': edad, 'nombre':apellidos , 'usuarios': usuarios,'perfil':perfil}
+    context = {'edad': edad, 'nombre':apellidos , 'usuarios': usuarios,'my_id':usuario_id, 'perfil':perfil }
     return render(request, 'clinica_fenix_01/PagePrivate.html', context)
 
 
@@ -71,10 +81,10 @@ class EliminarPaciente(DeleteView):
 
 
 class EditarPaciente(UpdateView):
-    model = Usuario
-    template_name= "clinica_fenix_01/editar_cliente.html"
-    fields = '__all__'
-    success_url = reverse_lazy('clinica_fenix_01:lista_usuario')
+        model = Usuario
+        template_name= "clinica_fenix_01/editar_cliente.html"
+        fields = '__all__'
+        success_url = reverse_lazy('clinica_fenix_01:lista_usuario')
 
     
 class ListaExamenes(ListView):
@@ -99,7 +109,7 @@ class EliminarExamen(DeleteView):
     success_url = reverse_lazy('clinica_fenix_01:lista_examen')
 
 
-class EditarExamen(UpdateView):
+class EditarExamen( UpdateView):
     model = Examen
     template_name= "clinica_fenix_01/editar_examen.html"
     fields = '__all__'
@@ -130,12 +140,17 @@ def examen_cliente(request, pk):
                     continue
         else:
             pass
+
     context = {'id':id, 'cliente': cliente_datos, 'data_num': data_num , 'examen': examen }
     return render(request, 'clinica_fenix_01/render_cliente.html', context)
 
 
 class Registro(generic.CreateView):
+
+     
     form_class = UserCreationForm
+    #model = Usuario
+    #fields = '__all__'
     template_name= "clinica_fenix_01/registro.html"
     success_url = reverse_lazy('clinica_fenix_01:login')
 

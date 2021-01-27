@@ -9,9 +9,8 @@ from django.contrib.auth.models import User
 ROLES_CHOISES = [('ADMINISTRADOR', 'administrador'),('CLIENTE', 'cliente')]
 
 
-class Usuario(models.Model):   ## Se refiere a crear o ingresar un paciente nuevo
-
-
+class Usuario(models.Model): 
+  ## Se refiere a crear o ingresar un paciente nuevo
     usuario = models.OneToOneField(User, on_delete = models.CASCADE)
     rol = models.CharField(max_length=13,choices=ROLES_CHOISES,default="CLIENTE")
     primer_nombre = models.CharField(max_length=25)
