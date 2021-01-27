@@ -136,3 +136,6 @@ EMAIL_HOST_PASSWORD = 'Pruebasdesarrollo200'
 EMAIL_PORT = 587
 
 LOGIN_REDIRECT_URL = '/pagina_privada/'
+
+SESSION_COOKIE_AGE = 60*5                
+SESSION_SAVE_EVERY_REQUEST = True        

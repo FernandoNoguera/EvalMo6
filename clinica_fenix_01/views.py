@@ -1,70 +1,30 @@
 from django.shortcuts import render, redirect 
 from django.conf import settings
-from .forms import IngresoUsuario, FormularioUsuario, ContactForm
+from .forms import ContactForm
 import json
-from .models import Usuario, Examen, Profile
+from .models import Usuario, Examen
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import View
-import requests
+#import requests
 from django.core.mail import EmailMessage
-from django.shortcuts import render, redirect
-from django.conf import settings
-import random
+#from django.shortcuts import render, redirect
+#import random
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User 
 
 
 def inicio(request):
-    formulario = ContactForm(request.POST or None)
-    context = {'form':formulario}
-    if request.method == "POST":
-        formulario = ContactForm(request.POST)
-        if formulario.is_valid():
-            infoform = formulario.cleaned_data
-            filename = "\clinica_fenix_01\static\clinica_fenix_01\data\contactos.json"
-            with open(str(settings.BASE_DIR)+filename, "r") as file:
-                usuario = json.load(file)
-            infoform['id'] = usuario['ultimo_id_generado'] + 1
-            usuario['ultimo_id_generado'] = infoform['id']
-            usuario['usuario'].append(infoform)
-            with open(str(settings.BASE_DIR)+filename, 'w') as file:
-                json.dump(usuario, file)
-            asunto = infoform['asunto']
-            nombre = infoform['name']
-            emailcontacto = infoform['email']
-            message = infoform['message']
-            respuesta = ['Hola ', nombre,'. \n Hemos recibido tu mensaje:\n \n',
-                        message, '\n \n Pronto nuestro equipo se pondrá en contacto con usted al correo indicado: \n \n',
-                        emailcontacto, '\n \n Saludos del equipo. \n Clinica Fenix S.A.']
-            respuesta = "".join(map(str, respuesta))   
-            email = EmailMessage(asunto, respuesta, to=[emailcontacto])
-            emaily = EmailMessage('Correo de Prueba desde Django', 'Enviando correo de prueba', to=['Fnoguerav25@gmail.com'])  
-            email.send()
-            return redirect('clinica_fenix_01:index')     
-    return render(request, 'clinica_fenix_01/index.html',context)
-
-# se comenta por nuevo login def login(request):
-# se comenta por nuevo login     formulario = IngresoUsuario(request.POST or None)
-# se comenta por nuevo login     context = {'form':formulario}
-# se comenta por nuevo login     if formulario.is_valid():
-# se comenta por nuevo login         form_data = formulario.cleaned_data
-# se comenta por nuevo login         filename = "/clinica_fenix_01/static/clinica_fenix_01/data/usuario.json"
-# se comenta por nuevo login         with open(str(settings.BASE_DIR)+filename, 'r') as file:
-# se comenta por nuevo login             usuario=json.load(file)
-# se comenta por nuevo login         if (form_data['usuario'] == usuario['usuario']) and (form_data['clave'] == usuario['clave']):
-# se comenta por nuevo login             return redirect('clinica_fenix_01:portal_privado')               
-# se comenta por nuevo login         else:
-# se comenta por nuevo login             return redirect('clinica_fenix_01:login')               
-# se comenta por nuevo login     return render(request, 'clinica_fenix_01/registro.html',context)
+    return render(request, 'clinica_fenix_01/index.html')
 
 @login_required(login_url='/accounts/login/')
 def private_page(request):
     dic1 = {}
-    dic2 = {}
     edad = []
     apellidos = []
     usuarios = Usuario.objects.all().values()
@@ -77,7 +37,13 @@ def private_page(request):
                 apellidos.append(value)
             else:
                 continue
-    context = {'edad': edad, 'nombre':apellidos , 'usuarios': usuarios}
+
+    usuario_id = request.user.id #OBTENER ID DEL USUARIO QUE ESTA VISITANDO LA VISTA
+    #perfil = Usuario.objects.filter(usuario_id=usuario_id).values()[0]
+    perfil = Usuario.objects.all()[0]
+    
+
+    context = {'edad': edad, 'nombre':apellidos , 'usuarios': usuarios,'perfil':perfil}
     return render(request, 'clinica_fenix_01/PagePrivate.html', context)
 
 
@@ -171,6 +137,5 @@ def examen_cliente(request, pk):
 class Registro(generic.CreateView):
     form_class = UserCreationForm
     template_name= "clinica_fenix_01/registro.html"
-    #extra_context = {'formulario'}
     success_url = reverse_lazy('clinica_fenix_01:login')
 

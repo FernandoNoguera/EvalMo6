@@ -109,35 +109,6 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid bg-dark" id="enlaces">
-      <div class="row">
-        <h2>Contáctanos</h2>
-      </div>
-      <div class="row justify-content-center align-items-center h-100">
-        <div class="col-sm-6" id="contact-form">
-          <form  method="">
-            {% csrf_token %}
-            <div class="form-group">
-              <p><label for="id_name">Nombre:</label><br> <input type="text" name="name" required id="id_name"></p>
-            </div>
-            <div class="form-group">
-              <p><label for="id_asunto">Asunto:</label><br> <input type="text" name="asunto" required id="id_asunto"></p>
-            </div>
-            <div class="form-group">
-              <p><label for="id_email">Correo Electrónico:</label><br> <input type="email" name="email" required id="id_email"></p>
-            </div>
-            <div class="form-group">
-              <p><label for="id_message">Mensaje:</label><br> <textarea name="message" cols="40" rows="5" required id="id_message"></textarea></p>
-            </div>
-            <div class="btn-group">
-              <button type="submit" value="submit" class="btn btn-success">Enviar</button>
-            </div>
-            <br>
-          </form>
-        </div>
-      </div>
-    </div>
-    <br>
     <br>
     <footer class="footer bg-dark text-center fixed-bottom">
       <p class="text-muted">&copy; 2021 Clinica Fenix.</p>
