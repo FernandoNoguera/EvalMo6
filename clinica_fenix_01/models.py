@@ -33,6 +33,7 @@ class Usuario(models.Model):   ## Se refiere a crear o ingresar un paciente nuev
     nacionalidad = models.CharField(max_length=60)
     telefono = models.IntegerField()
     direccion = models.CharField(max_length=50)
+    #usuario_id = models.ForeignKey(User,on_delete=models.CASCADE, null =True)
 
     class Meta:
         ordering = ['id']
@@ -65,7 +66,7 @@ class Examen(models.Model):   ## Se refiere a crear o ingresar un examen
     globulos_blancos = models.IntegerField()
     globulos_rojos = models.IntegerField()
     hematocritos = models.IntegerField()
-    usuario_id = models.ForeignKey(Profile,on_delete=models.CASCADE, null =True)
+    usuario_id = models.ForeignKey(User,on_delete=models.CASCADE, null =True)
 
     class Meta:
         ordering = ['id']

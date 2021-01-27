@@ -16,4 +16,5 @@ urlpatterns = [
     path("<int:pk>/borrar_examen/",views.EliminarExamen.as_view(), name="eliminar_examen"),
     path("<int:pk>/editar_examen/",views.EditarExamen.as_view(), name="editar_examen"),
     path("<int:pk>/examen_cliente/", views.examen_cliente, name="examen_cliente"),
+    path("registro", views.Registro.as_view(), name="registro"),
 ]

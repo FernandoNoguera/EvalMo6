@@ -15,6 +15,7 @@ import random
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from django.views import generic
 
 
 def inicio(request):
@@ -166,5 +167,10 @@ def examen_cliente(request, pk):
     context = {'id':id, 'cliente': cliente_datos, 'data_num': data_num , 'examen': examen }
     return render(request, 'clinica_fenix_01/render_cliente.html', context)
 
-def 
+
+class Registro(generic.CreateView):
+    form_class = UserCreationForm
+    template_name= "clinica_fenix_01/registro.html"
+    #extra_context = {'formulario'}
+    success_url = reverse_lazy('clinica_fenix_01:login')
 

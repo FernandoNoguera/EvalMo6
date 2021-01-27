@@ -25,30 +25,18 @@
       <img src="{% static 'clinica_fenix_01/img/LogIMG.png' %}" class="rounded" width="200px" height="200px" alt="Doc">
     </div>
     <div class="text-center">
-        <h1>Bienvenid@s</h1>
+        <h1>Por Favor Inicie Sesión</h1>
     </div>
     <br>
-    <div class="text-center">
-        <h3>Por favor inicie sesión</h3>
-        <h5 >Usuaro: admin</h5>
-        <h5 >pass: 123</h5>
-    </div>
     <br>
-    <div class="text-center">
+    <div class="d-flex justify-content-center">
       <form class="d-flex justify-content-center" method="post">
         {% csrf_token %}
-          <div class="shadow-lg p-3 mb-5 bg-white rounded">
-          <div class="form-group">
+          <div class="form-group shadow-lg p-3 mb-5 bg-white rounded">
               <h3>Ingresa</h3>
-              <br>
-              <table>
                 {{form.as_p}}
-              </table>
+              <input type="button" value="Crear">
           </div>
-          <div>
-            <input type="submit" value="Entrar">
-          </div>
-        </div>
       </form>
     </div>
     <footer class="footer bg-dark text-center fixed-bottom">
