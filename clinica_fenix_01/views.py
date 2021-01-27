@@ -1,33 +1,30 @@
 from django.shortcuts import render, redirect 
 from django.conf import settings
-from .forms import IngresoUsuario, FormularioUsuario
+from .forms import ContactForm
 import json
 from .models import Usuario, Examen
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import View
+#import requests
+from django.core.mail import EmailMessage
+#from django.shortcuts import render, redirect
+#import random
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User 
 
-def inicio(request):  
+
+def inicio(request):
     return render(request, 'clinica_fenix_01/index.html')
 
-def login(request):
-    formulario = IngresoUsuario(request.POST or None)
-    context = {'form':formulario}
-    if formulario.is_valid():
-        form_data = formulario.cleaned_data
-        filename = "/clinica_fenix_01/static/clinica_fenix_01/data/usuario.json"
-        with open(str(settings.BASE_DIR)+filename, 'r') as file:
-            usuario=json.load(file)
-        if (form_data['usuario'] == usuario['usuario']) and (form_data['clave'] == usuario['clave']):
-            return redirect('clinica_fenix_01:portal_privado')               
-        else:
-            return redirect('clinica_fenix_01:login')               
-    return render(request, 'clinica_fenix_01/registro.html',context)
-
+@login_required(login_url='/accounts/login/')
 def private_page(request):
     dic1 = {}
-    dic2 = {}
     edad = []
     apellidos = []
     usuarios = Usuario.objects.all().values()
@@ -40,7 +37,13 @@ def private_page(request):
                 apellidos.append(value)
             else:
                 continue
-    context = {'edad': edad, 'nombre':apellidos , 'usuarios': usuarios}
+
+    usuario_id = request.user.id #OBTENER ID DEL USUARIO QUE ESTA VISITANDO LA VISTA
+    #perfil = Usuario.objects.filter(usuario_id=usuario_id).values()[0]
+    perfil = Usuario.objects.all()[0]
+    
+
+    context = {'edad': edad, 'nombre':apellidos , 'usuarios': usuarios,'perfil':perfil}
     return render(request, 'clinica_fenix_01/PagePrivate.html', context)
 
 
@@ -129,4 +132,10 @@ def examen_cliente(request, pk):
             pass
     context = {'id':id, 'cliente': cliente_datos, 'data_num': data_num , 'examen': examen }
     return render(request, 'clinica_fenix_01/render_cliente.html', context)
+
+
+class Registro(generic.CreateView):
+    form_class = UserCreationForm
+    template_name= "clinica_fenix_01/registro.html"
+    success_url = reverse_lazy('clinica_fenix_01:login')
 

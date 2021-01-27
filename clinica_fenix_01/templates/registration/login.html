@@ -1,4 +1,3 @@
-
 {% load static %}
 <!doctype html>
 <html lang="es">
@@ -25,20 +24,32 @@
       <img src="{% static 'clinica_fenix_01/img/LogIMG.png' %}" class="rounded" width="200px" height="200px" alt="Doc">
     </div>
     <div class="text-center">
-        <h1>Cree su Usuario</h1>
+        <h1>Login</h1>
     </div>
     <br>
+    <div class="text-center">
+        <h3>Por favor inicie sesión</h3>
+        {% if form.errors %}
+        <h4>Los datos de autenticación no corresponden. Trata nuevamente.</h4>
+        {% endif %}
+
+        {% if next %}
+            {% if user.is_authenticated %}
+            <h4>Tu cuenta no tiene acceso a este recurso.</h4>
+            <p>Debes tener los privilegios, contacta al administrador.</p>
+            {% else %}
+            <p>Debes autenticarte para acceder a este sitio.</p>
+            {% endif %}
+        {% endif %}    
+    </div>
     <br>
     <div class="d-flex justify-content-center">
-      <form class="d-flex justify-content-center" method="post">
-        {% csrf_token %}
-          <div class="form-group shadow-lg p-3 mb-5 bg-white rounded">
-              <h3>Ingresa</h3>
-                {{form.as_p}}
-                
-              <input type="button" value="Crear">
-          </div>
-      </form>
+        <form class="shadow-lg p-3 mb-5 bg-white rounded" method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="btn btn-primary" value="Login" />
+            <input type="hidden" name="next" value="{{ next }}"/>
+        </form>
     </div>
     <footer class="footer bg-dark text-center fixed-bottom">
       <p class="text-muted">&copy; 2021 Clinica Fenix.</p>

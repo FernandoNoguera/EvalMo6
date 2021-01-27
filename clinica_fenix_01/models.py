@@ -2,39 +2,31 @@ from django.db import models
 from django.core import validators
 from django.core.exceptions import ValidationError
 import datetime
+from django.contrib.auth.models import User 
+
+
 # Create your models here.
+ROLES_CHOISES = [('ADMINISTRADOR', 'administrador'),('CLIENTE', 'cliente')]
 
 
 class Usuario(models.Model):   ## Se refiere a crear o ingresar un paciente nuevo
 
-    primer_nombre = models.CharField(
-        max_length=60,
-        validators=[validators.MinLengthValidator(
-                1,
-                "Primer nombre no puede tener solo 1  caracter")]
-        )
-    segundo_nombre = models.CharField(
-        max_length=60,
-        validators=[validators.MinLengthValidator(
-                1,
-                "Segundo nombre no puede tener solo 1 caracter")]
-        )
-    apellido_paterno = models.CharField(
-        max_length=60,
-        validators=[validators.MinLengthValidator(
-                1,
-                "Apellido paterno no puede tener solo 1 caracter ")]
-        )
-    apellido_materno = models.CharField(max_length=60)
+
+    usuario = models.OneToOneField(User, on_delete = models.CASCADE)
+    rol = models.CharField(max_length=13,choices=ROLES_CHOISES,default="CLIENTE")
+    primer_nombre = models.CharField(max_length=25)
+    segundo_nombre = models.CharField(max_length=25)
+    apellido_paterno = models.CharField(max_length=25)
+    apellido_materno = models.CharField(max_length=25)
     edad = models.IntegerField()
-    rut = models.CharField(max_length=60)
+    #rut = models.CharField(max_length=15)
     nacionalidad = models.CharField(max_length=60)
-    telefono = models.IntegerField()
+    #telefono = models.IntegerField()
     direccion = models.CharField(max_length=50)
+    #usuario_id = models.ForeignKey(User,on_delete=models.CASCADE, null =True)
 
     class Meta:
         ordering = ['id']
-
 
 class Examen(models.Model):   ## Se refiere a crear o ingresar un examen
 
@@ -42,7 +34,8 @@ class Examen(models.Model):   ## Se refiere a crear o ingresar un examen
     globulos_blancos = models.IntegerField()
     globulos_rojos = models.IntegerField()
     hematocritos = models.IntegerField()
-    usuario_id = models.ForeignKey(Usuario,on_delete=models.CASCADE, null =True)
+    usuario_id = models.ForeignKey(User,on_delete=models.CASCADE, null =True)
 
     class Meta:
         ordering = ['id']
+
