@@ -36,7 +36,8 @@
           <a href="{% url 'logout' %}?next={% url 'clinica_fenix_01:index' %}"class= "d-block p-4"> <i class="icon ion-md-heart"></i>    Salir</a>
           {% else %}
           <h1>Sus exámenes no estan listos aún</h1>
-          <a href="{% url 'logout' %}?next={% url 'clinica_fenix_01:index' %}"class= "d-block p-4"> <i class="icon ion-md-heart"></i>    Salir</a>
+          <h5>El administrador subira sus examenes pronto</h5>
+          <a href="{% url 'logout' %}?next={% url 'clinica_fenix_01:index' %}"class= "d-block p-4"> <i class="icon ion-md-heart"></i>    Salir (logout)</a>
 
           {% endif %}
         </nav>

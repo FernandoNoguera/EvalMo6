@@ -18,14 +18,7 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import UserPassesTestMixin
-
-
-#def es_jefe(user):
-#    rol = user.Usuario.rol
-#    if rol == "ADMINISTRADOR":
-#        return True
-#    else:
-#        return False 
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
 def inicio(request):
@@ -57,22 +50,27 @@ def private_page(request):
     return render(request, 'clinica_fenix_01/PagePrivate.html', context)
 
 
-class ListaPacientes(ListView):
+class ListaPacientes(LoginRequiredMixin, PermissionRequiredMixin,ListView):
+    permission_required = 'user.Usuario.rol=ADMINISTRADOR'
+    login_url= 'clinica_fenix_01:index'
     model= Usuario
     template_name= "clinica_fenix_01/lista_usuario.html"
     context_object_name = "Usuario"
     #extra_context = {'usuario': usuarios }
 
 
-
-class CrearUsuario(CreateView):
+class CrearUsuario(LoginRequiredMixin,PermissionRequiredMixin,CreateView):
+    permission_required = 'user.Usuario.rol=ADMINISTRADOR'
+    login_url= 'clinica_fenix_01:index'
     model = Usuario
     template_name= "clinica_fenix_01/new_user.html"
     fields = '__all__'
     success_url = reverse_lazy('clinica_fenix_01:lista_usuario')
 
 
-class EliminarPaciente(DeleteView):
+class EliminarPaciente(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
+    permission_required = 'user.Usuario.rol=ADMINISTRADOR'
+    login_url= 'clinica_fenix_01:index'
     model = Usuario
     template_name= "clinica_fenix_01/eliminar_cliente.html"
     context_object_name = "Usuario"
@@ -80,28 +78,36 @@ class EliminarPaciente(DeleteView):
     success_url = reverse_lazy('clinica_fenix_01:lista_usuario')
 
 
-class EditarPaciente(UpdateView):
-        model = Usuario
-        template_name= "clinica_fenix_01/editar_cliente.html"
-        fields = '__all__'
-        success_url = reverse_lazy('clinica_fenix_01:lista_usuario')
+class EditarPaciente(LoginRequiredMixin,PermissionRequiredMixin,UpdateView):
+    permission_required = 'user.Usuario.rol=ADMINISTRADOR'
+    login_url= 'clinica_fenix_01:index'
+    model = Usuario
+    template_name= "clinica_fenix_01/editar_cliente.html"
+    fields = '__all__'
+    success_url = reverse_lazy('clinica_fenix_01:lista_usuario')
 
     
-class ListaExamenes(ListView):
+class ListaExamenes(LoginRequiredMixin,PermissionRequiredMixin,ListView):
+    permission_required = 'user.Usuario.rol=ADMINISTRADOR'
+    login_url= 'clinica_fenix_01:index'
     model= Examen
     template_name= "clinica_fenix_01/lista_examen.html"
     context_object_name = "Examenes"
     #extra_context = {''}
 
 
-class CrearExamen(CreateView):
+class CrearExamen(LoginRequiredMixin,PermissionRequiredMixin,CreateView):
+    permission_required = 'user.Usuario.rol=ADMINISTRADOR'
+    login_url= 'clinica_fenix_01:index'
     model = Examen
     template_name= "clinica_fenix_01/new_examen.html"
     fields = '__all__'
     success_url = reverse_lazy('clinica_fenix_01:lista_examen')
 
 
-class EliminarExamen(DeleteView):
+class EliminarExamen(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
+    permission_required = 'user.Usuario.rol=ADMINISTRADOR'
+    login_url= 'clinica_fenix_01:index'
     model = Examen
     template_name= "clinica_fenix_01/eliminar_examen.html"
     context_object_name = "Examenes"
@@ -109,12 +115,14 @@ class EliminarExamen(DeleteView):
     success_url = reverse_lazy('clinica_fenix_01:lista_examen')
 
 
-class EditarExamen( UpdateView):
+class EditarExamen(LoginRequiredMixin,PermissionRequiredMixin,UpdateView):
+    permission_required = 'user.Usuario.rol=ADMINISTRADOR'
     model = Examen
     template_name= "clinica_fenix_01/editar_examen.html"
     fields = '__all__'
     success_url = reverse_lazy('clinica_fenix_01:lista_examen')
 
+@login_required(login_url='/accounts/login/')
 def examen_cliente(request, pk):
     dic1 = {}
     data_num = []
@@ -147,7 +155,6 @@ def examen_cliente(request, pk):
 
 class Registro(generic.CreateView):
 
-     
     form_class = UserCreationForm
     template_name= "clinica_fenix_01/registro.html"
     success_url = reverse_lazy('clinica_fenix_01:index')
