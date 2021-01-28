@@ -33,7 +33,6 @@
             <th>Globulos Blancos</th>
             <th>Globulos Rojos</th>
             <th>Hematocritos</th>
-            <th>Paciente</th>
             <th></th>
             <th></th>
         </tr>    
@@ -44,7 +43,7 @@
             <td>{{Examen.globulos_blancos}}</td>
             <td>{{Examen.globulos_rojos}}</td>
             <td>{{Examen.hematocritos}}</td>
-            <td>{{Examen.usuario_id.apellido_paterno}}</td>
+            
             <td>
                 <a class="boton" href="{% url 'clinica_fenix_01:editar_examen' pk=Examen.id %}"> Editar</a>
             </td>

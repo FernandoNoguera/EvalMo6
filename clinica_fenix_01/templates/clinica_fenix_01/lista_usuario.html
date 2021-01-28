@@ -35,9 +35,8 @@
                         <th>Nombres</th>
                         <th>Apellidos</th>
                         <th>Edad</th>
-                        <th>Run</th>
+                        <th>Rol</th>
                         <th>Nacionalidad</th>
-                        <th>Telefono</th>
                         <th>Dirección</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
@@ -49,9 +48,8 @@
                         <td>{{paciente.primer_nombre}} {{paciente.segundo_nombre}}</td>
                         <td>{{paciente.apellido_paterno}} {{paciente.apellido_materno}}</td>
                         <td>{{paciente.edad}}</td>
-                        <td>{{paciente.usuario}}</td>
+                        <td>{{paciente.rol}}</td>
                         <td>{{paciente.nacionalidad}}</td>
-                        <td>{{paciente.telefono}}</td>
                         <td>{{paciente.direccion}}</td>
                         <td>
                             <a class="boton" href="{% url 'clinica_fenix_01:editar_cliente' pk=paciente.id %}"> Editar</a>
